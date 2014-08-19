@@ -1,0 +1,87 @@
+<form name="newForm">
+  <fieldset>
+    <legend>
+      Новый Документ
+    </legend>
+      <div class="control-group">
+        <label class="control-label">
+          Название
+        </label>
+        <div class="controls">
+            <input type="text"
+                   name="form[title]"
+                   ng-model="form.title"
+                   class="text_field"
+                   required>
+          <span ng-show="newForm.title.$error.required"
+                class="help-inline">
+            Указывать обязательно
+          </span>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Поля
+        </label>
+
+        <div ng-repeat="field in fields"  class="controls">
+          <input type="text" ng-model="field.title" placeholder="Название" required>
+          <input type="text" ng-model="field.tag" placeholder="Тэг" required>
+          <a class="btn btn-success" ng-click="addField()">
+            <i class="icon-plus"></i>
+          </a>
+          <a class="btn btn-danger" ng-click="removeField($index)" ng-hide="fields.length == 1">
+            <i class="icon-trash"></i>
+          </a>
+        </div>
+
+        <!--<div class="controls">-->
+            <!--<input type="text"-->
+                   <!--name="form[fields]"-->
+                   <!--ng-model="form.fields"-->
+                   <!--class="text_area"-->
+                   <!--required>-->
+          <!--<span ng-show="newForm.fields.$error.required"-->
+                <!--class="help-inline">-->
+            <!--Указывать обязательно-->
+          <!--</span>-->
+        <!--</div>-->
+      </div>
+      <div class="control-group">
+        <label class="control-label">
+          Итоговый Документ
+        </label>
+
+        <div class="row"><div class="span6">
+          <span ng-repeat="field in fields">
+            <a href="#" ng-hide="field.tag==''" ng-click="addTag('<' + field.tag + '>')"><{{field.tag}}></a>
+            &nbsp;</span>
+          </div>
+        </div>
+        <div class="controls">
+            <textarea
+                   name="form[view]"
+                   ng-model="form.view"
+                   class="text_area span6"
+                   required></textarea>
+          <span ng-show="newForm.view.$error.required"
+                class="help-inline">
+            Указывать обязательно
+          </span>
+        </div>
+      </div>
+    <div class="form-actions">
+      <button class="btn btn-success" ng-click="save()"
+        ng-disabled="isClean() || newForm.$invalid">
+        <i class="icon-save"></i> Сохранить
+      </button>
+      <button ng-click="destroy()"
+              ng-show="form.id"
+              class="btn btn-danger">
+              <i class="icon-trash"></i> Удалить
+      </button>
+      <a href="/forms" class="btn">Назад к документам</a>
+    </div>
+  </fieldset>
+</form>
+

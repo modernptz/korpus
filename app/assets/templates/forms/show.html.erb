@@ -1,0 +1,28 @@
+<h1>
+  {{form.title}}
+</h1>
+<div ng-form="ShowForm">
+  <div class="control-group" ng-repeat="field in fields" ng-hide="done">
+    <label class="control-label">
+      {{field.title}}
+    </label>
+    <div class="controls">
+      <input type="text" ng-model="newform[field.tag]" required>
+    </div>
+  </div>
+
+<p ng-show="done">
+  {{form.view}}
+</p>
+
+<div class="form-actions">
+  <button type="button" ng-click="justDoIt()" ng-disabled="ShowForm.$invalid"
+     class="btn btn-primary"><i class="icon-share"></i>
+    Показать результат
+  </button>
+  <a href="/forms" class="btn">
+    Назад к документам
+  </a>
+</div>
+
+</div>
